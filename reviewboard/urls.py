@@ -7,7 +7,7 @@ from django.contrib import admin
 
 from reviewboard.extensions.base import get_extension_manager
 from reviewboard.webapi.resources import root_resource
-
+from reviewboard.reviews.feeds import RssSubmitterReviewsFeed
 
 extension_manager = get_extension_manager()
 
@@ -73,6 +73,8 @@ localsite_urlpatterns = patterns('',
     # Dashboard
     url(r'^dashboard/$',
         'reviewboard.reviews.views.dashboard', name="dashboard"),
+    url(r'^dashboard/feed/(?P<username>[A-Za-z0-9@_\-\.]+)/$',
+     RssSubmitterReviewsFeed(), name="submitter-feeds"),
 
     # Users
     url(r'^users/$',
